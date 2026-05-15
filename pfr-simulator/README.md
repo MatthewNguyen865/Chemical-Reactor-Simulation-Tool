@@ -109,7 +109,7 @@ This simulation demonstrates:
 ---
 
 # Project Structure
-
+```
 pfr-simulator/
 |
 |--- main.py
@@ -117,7 +117,7 @@ pfr-simulator/
 |--- plots.py
 |--- README.md
 |--- requirements.txt
-
+```
 ---
 
 # Installation
@@ -131,14 +131,6 @@ git clone https://github.com/MatthewNguyen865/pfr-simulator.git
 pip install r- requirements.txt
 
 ### Run the program:
-
-python main.py
-
----
-
-# Usage
-
-Run the simulation:
 
 python main.py
 
