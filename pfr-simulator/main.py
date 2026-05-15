@@ -2,36 +2,40 @@
 
 import numpy as np
 from scipy.integrate import solve_ivp
-
-from reactor_model import dCAdV
+from reactor_model import solve_pfr, solve_cstr
 from plotting import plot_concentration, plot_conversion
-from parameters import CA0, V_final
+from parameters import CA0, V_final, FA0
 
-
-print("Plug Flow Reactor Simulation")
+print("PFR and CSTR Simulation")
 print("----------------------------")
 print("Reaction: A → B")
 print("Rate law: rA = -kCA")
 
-
-# Solve reactor differential equation
+# Solve reactor equations
 
 V_span = (0, V_final)
 
 V_eval = np.linspace(0, V_final, 100)
 
-solution = solve_ivp(dCAdV, V_span, [CA0], t_eval=V_eval)
+pfr_solution = solve_ivp(solve_pfr, V_span, [CA0], t_eval=V_eval)
+cstr_CA= []
+for V in V_eval:
+    CA_exit_cstr = solve_cstr(CA0, FA0, V)
+    cstr_CA.append(CA_exit_cstr)
 
-V = solution.t
-CA = solution.y[0]
-
+pfr_V = pfr_solution.t
+pfr_CA = pfr_solution.y[0]
 
 print("Simulation complete.")
-print("Final concentration of A:", CA[-1])
-
+print("Final PFR concentration:", f"{pfr_CA[-1]:.4f}")
+print("Final PFR conversion:", f"{(CA0 - pfr_CA[-1]) / CA0:.4f}")
+print("Final CSTR concentration:", f"{cstr_CA[-1]:.4f}")
+print("Final CSTR conversion:", f"{(CA0 - cstr_CA[-1]) / CA0:.4f}")
 
 # Plot results
 
-plot_concentration(V, CA)
+plot_concentration(pfr_V, pfr_CA, cstr_CA)
 
-plot_conversion(V, CA, CA0)
+plot_conversion(pfr_V, pfr_CA, np.array(cstr_CA), CA0)
+
+
