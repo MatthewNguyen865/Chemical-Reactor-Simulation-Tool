@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.integrate import solve_ivp
 from reactor_model import solve_pfr, solve_cstr
-from plotting import plot_concentration, plot_conversion
+from plotting import plot_concentration, plot_conversion, levenspiel
 from parameters import CA0, V_final, FA0
 
 print("PFR and CSTR Simulation")
@@ -38,4 +38,7 @@ plot_concentration(pfr_V, pfr_CA, cstr_CA)
 
 plot_conversion(pfr_V, pfr_CA, np.array(cstr_CA), CA0)
 
+# Levenspiel plot
 
+Cstr_X_out = (CA0 - cstr_CA[-1]) / CA0
+levenspiel(Cstr_X_out)
