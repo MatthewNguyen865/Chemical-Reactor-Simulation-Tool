@@ -18,6 +18,7 @@ def plot_concentration(V, CA, CA2):
     plt.title("Concentration Profile in Plug Flow Reactor")
     plt.legend()
 
+    plt.tight_layout()
     plt.show()
 
 
@@ -39,4 +40,5 @@ def plot_conversion(V, CA, CA2, CA0):
     plt.title("Conversion vs Reactor Volume")
     plt.legend()
 
+    plt.tight_layout()
     plt.show()
