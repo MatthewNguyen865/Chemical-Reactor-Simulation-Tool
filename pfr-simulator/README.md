@@ -1,64 +1,173 @@
-# Plug Flow Reactor Simulator
+# Plug Flow Reactor (PFR) Simulator
 
-This project simulates a simple plug flow reactor (PFR) using Python.
+A Python-based numerical simulation of a Plug Flow Reactor (PFR) for modeling concentration profiles and conversion in a first-order chemical reaction system.
 
-The purpose of this project was to learn how chemical engineering
-reactor models can be implemented computationally.
+This project demonstrates how core chemical reaction engineering principles can be implemented using numerical methods and scientific computing in Python.
 
 ---
 
-## Reaction
+# Overview
+
+This simulator models a **Plug Flow Reactor (PFR)**, an ideal reactor type commonly used in chemical engineering where fluid flows through a tubular system with no axial mixing.
+
+The model computes how reactant concentration changes along reactor volume by solving the governing differential equations numerically.
+
+---
+
+# Governing Reaction
 
 A → B
 
-The reaction follows first order kinetics:
+First-order reaction kinetics:
 
-rA = -kCA
+rA = -k * CA
 
-where:
+Where:
 
-rA = reaction rate of species A  
-k = reaction rate constant  
-CA = concentration of A  
-
----
-
-## Reactor Model
-
-For a plug flow reactor, the concentration changes along reactor volume:
-
-dCA/dV = rA / FA0
-
-This differential equation is solved numerically using scipy.
+- rA = rate of reaction (mol/L·s)  
+- k = rate constant (1/s)  
+- CA = concentration of species A (mol/L)
 
 ---
 
-## What This Project Demonstrates
+# Reactor Model
 
-- translating chemical engineering equations into code
-- numerical solution of differential equations
-- data visualization using matplotlib
-- modular Python programming
+The system is based on the PFR design equation:
+
+dFA / dV = rA
+
+For constant volumetric flow rate:
+
+dCA / dV = rA / v0
+
+Where:
+
+- V = reactor volume (L)  
+- v0 = volumetric flow rate (L/s)  
+- CA = concentration of A (mol/L)
+
+This equation is solved numerically using discretization of the reactor volume.
 
 ---
 
-## Running the Simulation
+# Numerical Method
 
-Install dependencies:
+The reactor is divided into small finite volume steps.
 
-pip install -r requirements.txt
+At each step:
+1. Reaction rate is calculated using current concentration
+2. Concentration is updated using a numerical integration method
+3. The solution advances along the reactor volume
 
-Run the model:
+This approach approximates the continuous differential equation using a stepwise numerical solver (Euler-type integration).
+
+---
+
+# Key Features
+
+- Simulates concentration profiles along reactor volume
+- Implements first-order reaction kinetics
+- Numerically solves the PFR design equation
+- Computes reactant conversion
+- Generates engineering plots of reactor behavior
+
+---
+
+# Model Inputs
+
+The simulation accepts the following parameters:
+
+- Initial concentration (CA0)
+- Reaction rate constant (k)
+- Volumetric flow rate (v0)
+- Total reactor volume (V)
+- Number of discretization steps
+
+---
+
+# Outputs
+
+The model generates:
+
+- Concentration vs reactor volume profile
+- Outlet concentration
+- Reactant conversion:
+
+X = (CA0 - CA) / CA0
+
+---
+
+# Engineering Applications
+
+This simulation demonstrates:
+
+- Numerical solution of chemical reaction engineering models
+- Relationship between kinetics and reactor performance
+- Behavior of ideal plug flow reactors under first-order kinetics
+- Discretization of differential design equations
+
+---
+
+# Project Structure
+
+pfr-simulator/
+|
+|--- main.py
+|--- parameters.py
+|--- plots.py
+|--- README.md
+|--- requirements.txt
+
+---
+
+# Installation
+
+### Clone the repository:
+
+git clone https://github.com/MatthewNguyen865/pfr-simulator.git
+
+### Install required packages:
+
+pip install r- requirements.txt
+
+### Run the program:
 
 python main.py
 
 ---
 
-## Future Improvements
+# Usage
 
-Possible upgrades to this project:
+Run the simulation:
 
-- temperature dependent reaction kinetics
-- multiple reactions
-- energy balance in the reactor
-- graphical user interface
+python main.py
+
+---
+
+# Skills Demonstrated
+
+- Chemical reaction engineering fundamentals
+- Numerical methods for differential equations
+- Scientific programming in Python
+- Data visualization (matplotlib)
+- Modular code organization
+
+---
+
+# Future Improvements
+
+Planned extensions:
+
+- Second-order and multi-reaction systems
+- Temperature-dependent kinetics (Arrhenius model)
+- Non-isothermal reactor modeling (energy balance)
+- Comparison between PFR and CSTR performance
+- Interactive or GUI-based simulation interface
+
+---
+
+#Author
+
+Matthew Nguyen
+Chemical Engineering Student
+Texas A&M University
