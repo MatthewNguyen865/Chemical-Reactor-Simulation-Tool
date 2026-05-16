@@ -52,3 +52,26 @@ def solve_cstr(CA0, FA0, V):
     CA_solution = fsolve(equation, CA_guess)
 
     return CA_solution[0]
+
+
+def solve_cstr_train(CA0, FA0, V_total, N):
+    """
+    CSTR train model (PFR approximation using N CSTRs in series)
+    """
+
+    dV = V_total / N
+    CA = CA0
+
+    CA_profile = [CA0]
+
+    for i in range(N):
+
+        rA = reaction_rate(CA)
+
+        # CSTR mole balance:
+        # FA0(CA_in - CA_out) = -rA * V
+        CA = CA + (rA * dV) / FA0
+
+        CA_profile.append(CA)
+
+    return CA_profile
