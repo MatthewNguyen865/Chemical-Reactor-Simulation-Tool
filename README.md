@@ -1,38 +1,55 @@
-# Plug Flow Reactor (PFR) Simulator
+# Chemical Reactor Simulation Tool
 
-A Python-based numerical simulation of a Plug Flow Reactor (PFR) for modeling concentration profiles and conversion in a first-order chemical reaction system.
+Example reactor concentration profile:
 
-This project demonstrates how core chemical reaction engineering principles can be implemented using numerical methods and scientific computing in Python.
+![Concentration Plot](example_plots/concentration_profile.png)
+![Conversion Plot](example_plots/conversion_profile.png)
+![Levenspiel Plot](example_plots/levenspiel_plot.png)
+
+A Python-based simulation of ideal chemical reactors used in chemical reaction engineering.  
+The project numerically models **Plug Flow Reactors (PFR)**, **Continuous Stirred Tank Reactors (CSTR)**, and **CSTR trains**, and visualizes reactor performance using engineering plots including a **Levenspiel diagram**.
+
+This project demonstrates how core chemical engineering reactor design equations can be implemented using numerical methods and scientific computing in Python.
 
 ---
 
 # Overview
 
-This simulator models a **Plug Flow Reactor (PFR)**, an ideal reactor type commonly used in chemical engineering where fluid flows through a tubular system with no axial mixing.
+Chemical reactors are fundamental units in chemical engineering used to convert reactants into products. Different reactor designs lead to different performance characteristics.
 
-The model computes how reactant concentration changes along reactor volume by solving the governing differential equations numerically.
+This simulation models and compares three ideal reactor configurations:
+
+• Plug Flow Reactor (PFR)  
+• Continuous Stirred Tank Reactor (CSTR)  
+• CSTR train (series of CSTRs approximating a PFR)
+
+The model solves the governing reactor equations numerically and visualizes concentration profiles, conversion, and reactor design relationships.
 
 ---
 
-# Governing Reaction
+# Reaction System
+
+Reaction:
 
 A → B
 
 First-order reaction kinetics:
 
-rA = -k * CA
+rA = -k · CA
 
 Where:
 
-- rA = rate of reaction (mol/L·s)  
-- k = rate constant (1/s)  
+- rA = reaction rate (mol/L·s)
+- k = rate constant (1/s)
 - CA = concentration of species A (mol/L)
 
 ---
 
-# Reactor Model
+# Reactor Models
 
-The system is based on the PFR design equation:
+## Plug Flow Reactor (PFR)
+
+The PFR design equation:
 
 dFA / dV = rA
 
@@ -40,126 +57,147 @@ For constant volumetric flow rate:
 
 dCA / dV = rA / v0
 
-Where:
-
-- V = reactor volume (L)  
-- v0 = volumetric flow rate (L/s)  
-- CA = concentration of A (mol/L)
-
-This equation is solved numerically using discretization of the reactor volume.
+This differential equation is solved numerically using the ODE solver from SciPy.
 
 ---
 
-# Numerical Method
+## Continuous Stirred Tank Reactor (CSTR)
 
-The reactor is divided into small finite volume steps.
+For a steady-state CSTR:
 
-At each step:
-1. Reaction rate is calculated using current concentration
-2. Concentration is updated using a numerical integration method
-3. The solution advances along the reactor volume
+FA0 - FA + rA · V = 0
 
-This approach approximates the continuous differential equation using a stepwise numerical solver (Euler-type integration).
+Which can be written in terms of concentration:
 
----
+CA = CA0 - ((-rA · V) / FA0)
 
-# Key Features
-
-- Simulates concentration profiles along reactor volume
-- Implements first-order reaction kinetics
-- Numerically solves the PFR design equation
-- Computes reactant conversion
-- Generates engineering plots of reactor behavior
+The model solves this algebraic equation for the outlet concentration.
 
 ---
 
-# Model Inputs
+## CSTR Train
 
-The simulation accepts the following parameters:
+A series of CSTRs can approximate plug flow behavior.
 
-- Initial concentration (CA0)
-- Reaction rate constant (k)
-- Volumetric flow rate (v0)
-- Total reactor volume (V)
-- Number of discretization steps
+Each reactor uses the outlet concentration from the previous reactor as its inlet concentration:
 
----
+CAₙ₊₁ = CSTR(CAₙ)
 
-# Outputs
-
-The model generates:
-
-- Concentration vs reactor volume profile
-- Outlet concentration
-- Reactant conversion:
-
-X = (CA0 - CA) / CA0
+As the number of tanks increases, the system approaches PFR performance.
 
 ---
 
-# Engineering Applications
+# Levenspiel Diagram
 
-This simulation demonstrates:
+The project also generates a **Levenspiel plot**, a classic reactor design visualization:
 
-- Numerical solution of chemical reaction engineering models
-- Relationship between kinetics and reactor performance
-- Behavior of ideal plug flow reactors under first-order kinetics
-- Discretization of differential design equations
+F_A0 / (-r_A) vs conversion X
+
+This diagram is used to compare reactor performance:
+
+• Area under the curve → required PFR volume  
+• Rectangle area → required CSTR volume  
+
+The simulation illustrates how reactor type affects required reactor volume for a given conversion.
+
+---
+
+# Example Plots
+
+The simulation produces the following engineering plots:
+
+• Concentration vs reactor volume  
+• Conversion vs reactor volume  
+• Levenspiel diagram  
+• Comparison between PFR, CSTR, and CSTR train behavior
+
+Example outputs are included in the `example_plots/` folder.
 
 ---
 
 # Project Structure
+
 ```
-pfr-simulator/
-|
-|--- main.py
-|--- parameters.py
-|--- plots.py
-|--- README.md
-|--- requirements.txt
+chemical-reactor-simulation-tool
+│
+├── main.py
+├── reactor_model.py
+├── plotting.py
+├── parameters.py
+├── requirements.txt
+├── README.md
+│
+└── example_plots/
+    ├── concentration_plot.png
+    ├── conversion_plot.png
+    └── levenspiel_plot.png
 ```
+
 ---
 
 # Installation
 
-### Clone the repository:
+### Clone the repository
 
-git clone https://github.com/MatthewNguyen865/pfr-simulator.git
+```
+git clone https://github.com/MatthewNguyen865/chemical-reactor-simulation-tool.git
+```
 
-### Install required packages:
+### Install dependencies
 
-pip install r- requirements.txt
+```
+pip install -r requirements.txt
+```
 
-### Run the program:
+### Run the simulation
 
+```
 python main.py
+```
+
+---
+
+# Technologies Used
+
+• Python  
+• NumPy  
+• SciPy  
+• Matplotlib  
 
 ---
 
 # Skills Demonstrated
 
-- Chemical reaction engineering fundamentals
-- Numerical methods for differential equations
-- Scientific programming in Python
-- Data visualization (matplotlib)
-- Modular code organization
+## Chemical Engineering
+
+• Reactor design equations  
+• Reaction kinetics modeling  
+• Levenspiel analysis  
+• Comparison of ideal reactor types  
+
+## Programming
+
+• Scientific computing in Python  
+• Numerical solution of differential equations  
+• Data visualization  
+• Modular project structure
 
 ---
 
 # Future Improvements
 
-Planned extensions:
+Potential extensions for the simulator:
 
-- Second-order and multi-reaction systems
-- Temperature-dependent kinetics (Arrhenius model)
-- Non-isothermal reactor modeling (energy balance)
-- Comparison between PFR and CSTR performance
-- Interactive or GUI-based simulation interface
+• Higher-order and multiple reaction systems  
+• Temperature-dependent kinetics (Arrhenius equation)  
+• Non-isothermal reactor modeling (energy balances)  
+• Optimization of reactor volume for target conversion  
+• Interactive visualization or GUI interface
 
 ---
 
-#Author
+# Author
 
-Matthew Nguyen
-Chemical Engineering Student
+Matthew Nguyen  
+Chemical Engineering Student  
 Texas A&M University
