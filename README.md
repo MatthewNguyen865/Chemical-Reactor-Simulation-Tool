@@ -2,9 +2,9 @@
 
 Example reactor concentration profile:
 
-![Concentration Plot](example_plots/concentration_profile.png)
-![Conversion Plot](example_plots/conversion_profile.png)
-![Levenspiel Plot](example_plots/levenspiel_plot.png)
+<img src="example_plots/concentration_plot.png" width="500">
+
+The concentration profile of reactant A along reactor volume for three reactor configurations: an ideal Plug Flow Reactor (PFR), a single Continuous Stirred Tank Reactor (CSTR), and a series of CSTRs approximating plug flow behavior. As the number of tanks in the CSTR train increases, the system approaches the performance of a PFR.
 
 A Python-based simulation of ideal chemical reactors used in chemical reaction engineering.  
 The project numerically models **Plug Flow Reactors (PFR)**, **Continuous Stirred Tank Reactors (CSTR)**, and **CSTR trains**, and visualizes reactor performance using engineering plots including a **Levenspiel diagram**.
