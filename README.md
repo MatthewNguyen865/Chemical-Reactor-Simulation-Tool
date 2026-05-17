@@ -2,7 +2,7 @@
 
 Example reactor concentration profile:
 
-<img src="example_plots/concentration_plot.png" width="500">
+![Concentration Plot](example_plots/concentration_plot.png)
 
 The concentration profile of reactant A along reactor volume for three reactor configurations: an ideal Plug Flow Reactor (PFR), a single Continuous Stirred Tank Reactor (CSTR), and a series of CSTRs approximating plug flow behavior. As the number of tanks in the CSTR train increases, the system approaches the performance of a PFR.
 
