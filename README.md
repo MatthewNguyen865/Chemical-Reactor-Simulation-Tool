@@ -1,13 +1,18 @@
 # Chemical Reactor Simulation Tool
 
-Example reactor concentration profile:
+<p align="center">
+  <img src="example_plots/concentration_profile.png" width="500">
+</p>
 
-![Concentration Plot](example_plots/concentration_plot.png)
+<p align="center">
+Concentration profile of reactant A across PFR, CSTR, and CSTR train models.
+</p>
 
-The concentration profile of reactant A along reactor volume for three reactor configurations: an ideal Plug Flow Reactor (PFR), a single Continuous Stirred Tank Reactor (CSTR), and a series of CSTRs approximating plug flow behavior. As the number of tanks in the CSTR train increases, the system approaches the performance of a PFR.
+---
 
 A Python-based simulation of ideal chemical reactors used in chemical reaction engineering.  
-The project numerically models **Plug Flow Reactors (PFR)**, **Continuous Stirred Tank Reactors (CSTR)**, and **CSTR trains**, and visualizes reactor performance using engineering plots including a **Levenspiel diagram**.
+
+The project models **Plug Flow Reactors (PFR)**, **Continuous Stirred Tank Reactors (CSTR)**, and **CSTR trains**, and visualizes reactor behavior using engineering plots such as concentration profiles, conversion curves, and Levenspiel diagrams.
 
 This project demonstrates how core chemical engineering reactor design equations can be implemented using numerical methods and scientific computing in Python.
 
@@ -35,13 +40,13 @@ A → B
 
 First-order reaction kinetics:
 
-rA = -k · CA
+r_A = -k · C_A
 
 Where:
 
-- rA = reaction rate (mol/L·s)
+- r_A = reaction rate (mol/L·s)
 - k = rate constant (1/s)
-- CA = concentration of species A (mol/L)
+- C_A = concentration of species A (mol/L)
 
 ---
 
@@ -51,13 +56,13 @@ Where:
 
 The PFR design equation:
 
-dFA / dV = rA
+dFA / dV = r_A
 
 For constant volumetric flow rate:
 
-dCA / dV = rA / v0
+dCA / dV = r_A / v0
 
-This differential equation is solved numerically using the ODE solver from SciPy.
+This differential equation is solved numerically using SciPy.
 
 ---
 
@@ -65,53 +70,71 @@ This differential equation is solved numerically using the ODE solver from SciPy
 
 For a steady-state CSTR:
 
-FA0 - FA + rA · V = 0
+F_A0 - F_A + r_A · V = 0
 
 Which can be written in terms of concentration:
 
-CA = CA0 - ((-rA · V) / FA0)
+C_A = C_A0 - ((-r_A · V) / F_A0)
 
-The model solves this algebraic equation for the outlet concentration.
+The outlet concentration is obtained by solving the algebraic design equation.
 
 ---
 
 ## CSTR Train
 
-A series of CSTRs can approximate plug flow behavior.
+A CSTR train approximates plug flow behavior through a series of stirred tanks.
 
 Each reactor uses the outlet concentration from the previous reactor as its inlet concentration:
 
-CAₙ₊₁ = CSTR(CAₙ)
+C_Aₙ₊₁ = CSTR(C_Aₙ)
 
 As the number of tanks increases, the system approaches PFR performance.
 
 ---
 
+# Engineering Outputs
+
+The simulation generates the following outputs:
+
+• Concentration profiles along reactor volume  
+• Conversion profiles along reactor volume  
+• Levenspiel diagram for reactor sizing  
+• Comparison of PFR, CSTR, and CSTR train behavior  
+
+Example outputs are included in the `example_plots/` folder.
+
+---
+
+## Example Model Outputs
+
+### Conversion Profile
+<img src="example_plots/conversion_profile.png" width="500">
+
+<p align="center">
+Conversion of reactant A along reactor volume for PFR and CSTR models.
+</p>
+
+### Levenspiel Plot
+<img src="example_plots/levenspiel_plot.png" width="500">
+
+<p align="center">
+Levenspiel diagram comparing reactor volume requirements for PFR and CSTR systems.
+</p>
+
+---
+
 # Levenspiel Diagram
 
-The project also generates a **Levenspiel plot**, a classic reactor design visualization:
+The Levenspiel diagram is used to compare reactor performance and determine reactor sizing for PFR and CSTR systems:
 
-F_A0 / (-r_A) vs conversion X
+F_A0 / (-r_A) vs. conversion (X)
 
-This diagram is used to compare reactor performance:
+This allows direct comparison of reactor sizing requirements:
 
 • Area under the curve → required PFR volume  
 • Rectangle area → required CSTR volume  
 
 The simulation illustrates how reactor type affects required reactor volume for a given conversion.
-
----
-
-# Example Plots
-
-The simulation produces the following engineering plots:
-
-• Concentration vs reactor volume  
-• Conversion vs reactor volume  
-• Levenspiel diagram  
-• Comparison between PFR, CSTR, and CSTR train behavior
-
-Example outputs are included in the `example_plots/` folder.
 
 ---
 
@@ -181,6 +204,12 @@ python main.py
 • Numerical solution of differential equations  
 • Data visualization  
 • Modular project structure
+
+---
+
+## Project Evolution
+
+This project began as a Plug Flow Reactor (PFR) simulation solving a first-order reaction using numerical methods. It was later extended to include a Continuous Stirred Tank Reactor (CSTR) and a CSTR train model to compare ideal reactor behaviors. A Levenspiel diagram was added to connect simulation results with standard reactor design concepts.
 
 ---
 
