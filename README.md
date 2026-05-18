@@ -108,14 +108,18 @@ Example outputs are included in the `example_plots/` folder.
 ## Example Model Outputs
 
 ### Conversion Profile
+<p align="center">
 <img src="example_plots/conversion_profile.png" width="500">
+</p>
 
 <p align="center">
 Conversion of reactant A along reactor volume for PFR and CSTR models.
 </p>
 
 ### Levenspiel Plot
+<p align="center">
 <img src="example_plots/levenspiel_plot.png" width="500">
+</p>
 
 <p align="center">
 Levenspiel diagram comparing reactor volume requirements for PFR and CSTR systems.
