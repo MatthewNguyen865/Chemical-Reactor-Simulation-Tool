@@ -1,6 +1,5 @@
 # plotting.py
 
-from turtle import lt
 import matplotlib.pyplot as plt
 import numpy as np
 from reactor_model import reaction_rate
