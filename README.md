@@ -1,13 +1,14 @@
 # Chemical Reactor Simulation Tool
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-orange)
-![SciPy](https://img.shields.io/badge/SciPy-ODE%20Solver-yellow)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-Data%20Visualization-red)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?logo=scipy&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-orange)
+![Chemical Engineering](https://img.shields.io/badge/Field-Chemical%20Engineering-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 <p align="center">
-  <img src="example_plots/concentration_profile.png" width="500">
+  <img src="example_plots/concentration_profile.png" width="650">
 </p>
 
 <p align="center">
